@@ -19,6 +19,8 @@ add_executable(play main.cpp)
 target_link_libraries(play
     lvgl
     lvgl_drivers
+    lvgl_examples
+    lvgl_demos
 )
 
 
