@@ -1,0 +1,5 @@
+/home/parker/CM4share/LvglTemplate_CM4/build/CMakeFiles/edit_cache.dir
+/home/parker/CM4share/LvglTemplate_CM4/build/CMakeFiles/package_source.dir
+/home/parker/CM4share/LvglTemplate_CM4/build/CMakeFiles/rebuild_cache.dir
+/home/parker/CM4share/LvglTemplate_CM4/build/CMakeFiles/package.dir
+/home/parker/CM4share/LvglTemplate_CM4/build/CMakeFiles/play.dir
