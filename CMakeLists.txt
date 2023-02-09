@@ -7,6 +7,9 @@ include_directories(
 )
 
 
+# tick
+add_library(tick tick.c)
+
 # lvgl
 add_subdirectory(lv_drivers)
 add_subdirectory(lvgl)
@@ -21,6 +24,7 @@ target_link_libraries(play
     lvgl_drivers
     lvgl_examples
     lvgl_demos
+    tick
 )
 
 

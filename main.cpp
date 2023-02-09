@@ -1,15 +1,22 @@
+/**
+ * @file main.cpp
+ * @author Forairaaaaa
+ * @brief 
+ * @version 0.1
+ * @date 2023-02-08
+ * 
+ * @copyright Copyright (c) 2023
+ * 
+ */
 #include <iostream>
-#include <sys/times.h>
 #include <unistd.h>
+
 #include "lvgl/lvgl.h"
 #include "lv_drivers/display/fbdev.h"
 #include "lvgl/demos/lv_demos.h"
-
 #define LCD_WIDTH   320
 #define LCD_HEIGHT  240
-
 void lvgl_disp_init();
-
 
 
 
@@ -22,18 +29,22 @@ int main(int argc, char const *argv[])
     printf("lvgl frame buffer test :)\n");
 
     
+
+
+
     // lv_demo_widgets();
-    lv_demo_stress();
-    // lv_demo_benchmark();
+    // lv_demo_stress();
+    lv_demo_benchmark();
     // lv_demo_music();
 
 
-    /* Keep lvgl ticking */
+
     while(1)
     {
-        lv_tick_inc(1);
+        /* Periodically call the lv_task handler.
+        * It could be done in a timer interrupt or an OS task too.*/
         lv_timer_handler();
-        // usleep(500);
+        usleep(5 * 1000);
     }
 
 
@@ -42,11 +53,7 @@ int main(int argc, char const *argv[])
 
     
 
-    while (1)
-    {
-        printf("tick count in ms: %lu\n", (long int) times( NULL));
-        sleep(1);
-    }
+
 
 
     return 0;
