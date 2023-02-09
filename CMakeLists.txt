@@ -11,23 +11,18 @@ include_directories(
 add_library(tick tick.c)
 
 # lvgl
-add_subdirectory(lv_drivers)
 add_subdirectory(lvgl)
-
-
-
+add_subdirectory(lv_porting)
 
 
 add_executable(play main.cpp)
 target_link_libraries(play
     lvgl
-    lvgl_drivers
+    lvgl_porting
     lvgl_examples
     lvgl_demos
     tick
 )
-
-
 
 
 
