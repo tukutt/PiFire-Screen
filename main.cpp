@@ -31,11 +31,10 @@ int main(int argc, char const *argv[])
 
 
 
-    // lv_demo_widgets();
+    lv_demo_widgets();
     // lv_demo_stress();
-    lv_demo_benchmark();
+    // lv_demo_benchmark();
     // lv_demo_music();
-
 
 
 
