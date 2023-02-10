@@ -15,7 +15,7 @@
 #include "lvgl/lvgl.h"
 #include "lvgl/demos/lv_demos.h"
 #include "lv_porting/lv_port_disp.h"
-
+#include "lv_porting/lv_port_indev.h"
 
 
 
@@ -25,8 +25,9 @@ int main(int argc, char const *argv[])
     /* Lvgl init */
     lv_init();
     lv_port_disp_init();
+    lv_port_indev_init();
 
-    printf("lvgl frame buffer test :)\n");
+    printf("lvgl template with framebuffer :)\n");
 
 
 
@@ -34,9 +35,6 @@ int main(int argc, char const *argv[])
     // lv_demo_stress();
     // lv_demo_benchmark();
     // lv_demo_music();
-
-
-
 
 
 
