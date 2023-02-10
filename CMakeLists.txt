@@ -22,6 +22,7 @@ target_link_libraries(play
     lvgl_examples
     lvgl_demos
     tick
+    pthread
 )
 
 
