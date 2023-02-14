@@ -14,8 +14,14 @@ add_library(tick tick.c)
 add_subdirectory(lvgl)
 add_subdirectory(lv_porting)
 
+# app
+file(GLOB APP_SRCS 
+    app/ui/*.c
+)
+include_directories(app/ui)
 
-add_executable(play main.cpp)
+
+add_executable(play main.cpp ${APP_SRCS})
 target_link_libraries(play
     lvgl
     lvgl_porting
@@ -24,7 +30,6 @@ target_link_libraries(play
     tick
     pthread
 )
-
 
 
 add_custom_command(TARGET play
