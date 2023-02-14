@@ -141,7 +141,7 @@ void ui_Clock_screen_init(void)
     lv_obj_set_x(ui_LabelSysInfos, -22);
     lv_obj_set_y(ui_LabelSysInfos, 12);
     lv_obj_set_align(ui_LabelSysInfos, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_LabelSysInfos, "> hostname: m5stack\n> ip: 192.168.233.233\n> cpu: 66%\n> ram: 23%");
+    lv_label_set_text(ui_LabelSysInfos, "> hostname: cm4stack\n> ip: 192.168.233.233\n> cpu: 0.00\n> ram: 00%");
     lv_obj_set_style_text_color(ui_LabelSysInfos, lv_color_hex(0x929292), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_opa(ui_LabelSysInfos, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_font(ui_LabelSysInfos, &ui_font_HarmonyOSSansSCMedium16, LV_PART_MAIN | LV_STATE_DEFAULT);

@@ -26,7 +26,6 @@
 
 
 
-
 char* get_IP_address()
 {
     int fd;
@@ -62,6 +61,20 @@ double get_cpu_load()
 }
 
 
+double get_memory_usage()
+{
+    FILE* file = fopen("/proc/meminfo", "r");
+    unsigned long mem_total, mem_free;
+    fscanf(file, "MemTotal: %lu kB\nMemFree: %lu kB", &mem_total, &mem_free);
+    fclose(file);
+
+    double mem_usage = (double)(mem_total - mem_free) / mem_total * 100;
+    // printf("%ld %ld %f\n", mem_total, mem_free, mem_usage);
+    return mem_usage;
+}
+
+
+
 void data_update(lv_timer_t * timer)
 {
     /* get time */
@@ -73,12 +86,14 @@ void data_update(lv_timer_t * timer)
 
 
     char data_buff[100];
-    snprintf(data_buff, sizeof(data_buff), "> hostname: %s\n> ip: %s\n> laod average: %.2f%%\n> ram: %.2f%%",
+    snprintf(data_buff, sizeof(data_buff), "> hostname: %s\n> ip: %s\n> laod average: %.2f\n> mem usage: %.2f%%",
                 get_host_name(),
                 get_IP_address(),
                 get_cpu_load(),
-                23.3);
+                get_memory_usage());
     lv_label_set_text(ui_LabelSysInfos, data_buff);
+
+    get_memory_usage();
 
 }
 
