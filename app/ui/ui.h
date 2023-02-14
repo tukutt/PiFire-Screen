@@ -22,27 +22,31 @@ extern "C" {
 #include "lvgl.h"
 #endif
 
-void clock_pull_down_Animation(lv_obj_t * TargetObject, int delay);
+void cover_pull_down_Animation(lv_obj_t * TargetObject, int delay);
 void logo_popout_Animation(lv_obj_t * TargetObject, int delay);
+void cover_pull_up_Animation(lv_obj_t * TargetObject, int delay);
+void rotate_loop_Animation(lv_obj_t * TargetObject, int delay);
 extern lv_obj_t * ui_Clock;
 extern lv_obj_t * ui_PanelBG;
-extern lv_obj_t * ui_LogoPanel;
+extern lv_obj_t * ui_InfoPanel;
+extern lv_obj_t * ui_LabelSysInfos;
+extern lv_obj_t * ui_CoverPanel;
 extern lv_obj_t * ui_LogoC;
 extern lv_obj_t * ui_LogoM;
 extern lv_obj_t * ui_Logo4;
-extern lv_obj_t * ui_ClockPanel;
-extern lv_obj_t * ui_TimeHour;
 extern lv_obj_t * ui_TimeMinute;
+extern lv_obj_t * ui_TimeHour;
 extern lv_obj_t * ui_ImageWeather;
 
 
-LV_IMG_DECLARE(ui_img_logobg_png);    // assets\LogoBG.png
-LV_IMG_DECLARE(ui_img_clockbg_png);    // assets\ClockBG.png
+LV_IMG_DECLARE(ui_img_infobg_png);    // assets\InfoBG.png
+LV_IMG_DECLARE(ui_img_coverbg_png);    // assets\CoverBG.png
 LV_IMG_DECLARE(ui_img_sunny_png);    // assets\Sunny.png
 
 
 LV_FONT_DECLARE(ui_font_HarmonyOSSansSCLight);
 LV_FONT_DECLARE(ui_font_HarmonyOSSansSCMedium);
+LV_FONT_DECLARE(ui_font_HarmonyOSSansSCMedium16);
 
 
 void ui_init(void);
