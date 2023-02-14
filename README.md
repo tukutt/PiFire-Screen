@@ -1,4 +1,4 @@
-# LvglTemplate_CM4
+# Lvgl demo for CM4Stack
 
 
 #### Install tslib
