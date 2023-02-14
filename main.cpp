@@ -24,8 +24,6 @@
 #include <net/if.h>
 
 
-
-
 char* get_IP_address()
 {
     int fd;
@@ -74,7 +72,6 @@ double get_memory_usage()
 }
 
 
-
 void data_update(lv_timer_t * timer)
 {
     /* get time */
@@ -84,7 +81,7 @@ void data_update(lv_timer_t * timer)
     lv_label_set_text_fmt(ui_TimeHour, "%.2d", time_now->tm_hour);
     lv_label_set_text_fmt(ui_TimeMinute, "%.2d", time_now->tm_min);
 
-
+    /* update sys infos */
     char data_buff[100];
     snprintf(data_buff, sizeof(data_buff), "> hostname: %s\n> ip: %s\n> laod average: %.2f\n> mem usage: %.2f%%",
                 get_host_name(),
@@ -92,9 +89,6 @@ void data_update(lv_timer_t * timer)
                 get_cpu_load(),
                 get_memory_usage());
     lv_label_set_text(ui_LabelSysInfos, data_buff);
-
-    get_memory_usage();
-
 }
 
 
@@ -109,28 +103,23 @@ int main(int argc, char const *argv[])
     printf("ctrl + c to quit\n");
 
 
-
+    /* Lvgl official demos */
     // lv_demo_widgets();
     // lv_demo_stress();
     // lv_demo_benchmark();
     // lv_demo_music();
 
 
-
+    /* little clock demo */
     ui_init();
     lv_timer_t * timer = lv_timer_create(data_update, 1000, NULL);
-
     data_update(NULL);
-
-
     cover_pull_down_Animation(ui_CoverPanel, 0);
     logo_popout_Animation(ui_LogoC, 300 + 0);
     logo_popout_Animation(ui_LogoM, 300 + 100);
     logo_popout_Animation(ui_Logo4, 300 + 200);
     cover_pull_up_Animation(ui_CoverPanel, 3000);
 
-
-    get_IP_address();
 
 
     while(1)
