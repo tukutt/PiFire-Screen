@@ -1,1 +1,0 @@
-cp ~/projects/CM4/LvglTemplate_CM4/build/play ~/CM4share/
