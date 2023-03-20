@@ -28,6 +28,8 @@
 #define DISP_USING_FB       0
 /* Enable touch pad */
 #define USING_TOUCH_PAD     0
+/* Use offical demos */
+#define USING_LVGL_DEMOS    0
 
 
 static char* get_IP_address();
@@ -53,26 +55,26 @@ int main(int argc, char const *argv[])
     #endif
 
     /* Input device init */
-    #if USING_TOUCH_PAD
-    lv_port_indev_init();
+    lv_port_indev_init(USING_TOUCH_PAD);
+    
+
+    /* Lvgl offical demos */
+    #if USING_LVGL_DEMOS
+        lv_demo_widgets();
+        // lv_demo_stress();
+        // lv_demo_benchmark();
+        // lv_demo_music();
+    #else
+        /* Little clock demo */
+        ui_init();
+        lv_timer_t * timer = lv_timer_create(data_update, 1000, NULL);
+        data_update(NULL);
+        cover_pull_down_Animation(ui_CoverPanel, 0);
+        logo_popout_Animation(ui_LogoC, 300 + 0);
+        logo_popout_Animation(ui_LogoM, 300 + 100);
+        logo_popout_Animation(ui_Logo4, 300 + 200);
+        cover_pull_up_Animation(ui_CoverPanel, 3000);
     #endif
-
-
-    /* Little clock demo */
-    ui_init();
-    lv_timer_t * timer = lv_timer_create(data_update, 1000, NULL);
-    data_update(NULL);
-    cover_pull_down_Animation(ui_CoverPanel, 0);
-    logo_popout_Animation(ui_LogoC, 300 + 0);
-    logo_popout_Animation(ui_LogoM, 300 + 100);
-    logo_popout_Animation(ui_Logo4, 300 + 200);
-    cover_pull_up_Animation(ui_CoverPanel, 3000);
-
-    /* Or you can run Lvgl official demos */
-    // lv_demo_widgets();
-    // lv_demo_stress();
-    // lv_demo_benchmark();
-    // lv_demo_music();
 
 
     while(1)

@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.0)
-project(play VERSION 0.1.0)
+project(cm4LvglDemo VERSION 0.1.0)
 
 
 include_directories(
@@ -21,8 +21,8 @@ file(GLOB APP_SRCS
 include_directories(app/ui)
 
 
-add_executable(play main.cpp ${APP_SRCS})
-target_link_libraries(play
+add_executable(cm4LvglDemo main.cpp ${APP_SRCS})
+target_link_libraries(cm4LvglDemo
     lvgl
     lvgl_porting
     lvgl_examples

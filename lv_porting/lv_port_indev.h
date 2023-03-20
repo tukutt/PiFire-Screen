@@ -30,7 +30,7 @@ extern "C" {
 /**********************
  * GLOBAL PROTOTYPES
  **********************/
-void lv_port_indev_init(void);
+void lv_port_indev_init(uint8_t enableTouchPad);
 
 /**********************
  *      MACROS
