@@ -8,4 +8,6 @@ add_library(lvgl_porting
     lv_port_indev.c
     lv_port_indev.h
 )
-target_link_libraries(lvgl_porting lvgl_drivers tslib)
+find_package(SDL2 REQUIRED SDL2)
+include_directories(${SDL2_INCLUDE_DIRS})
+target_link_libraries(lvgl_porting lvgl_drivers tslib ${SDL2_LIBRARIES})

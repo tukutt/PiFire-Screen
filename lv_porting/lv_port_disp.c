@@ -12,7 +12,7 @@
 #include "lv_port_disp.h"
 #include <stdbool.h>
 #include "lv_drivers/display/fbdev.h"
-// #include "lv_drivers/sdl/sdl.h"
+#include "lv_drivers/sdl/sdl.h"
 
 /*********************
  *      DEFINES
@@ -52,7 +52,7 @@
  *   GLOBAL FUNCTIONS
  **********************/
 
-void lv_port_disp_init(void)
+void lv_port_disp_init(uint8_t type)
 {
     /*-------------------------
      * Initialize your display
@@ -132,12 +132,13 @@ void lv_port_disp_init(void)
     // /*Finally register the driver*/
     // lv_disp_drv_register(&disp_drv);
 
-
-    
-    /* Linux frame buffer device init */
-    fbdev_init();
-    // SDL_Init();
-
+    /* lv_device init */
+    if (type == 0) {
+        sdl_init();
+    }
+    else if (type == 1) {
+        fbdev_init();
+    }
     
     /* A small buffer for LittlevGL to draw the screen's content */
     static lv_color_t buf_1[MY_DISP_HOR_RES * MY_DISP_VER_RES];
@@ -151,8 +152,14 @@ void lv_port_disp_init(void)
     static lv_disp_drv_t disp_drv;
     lv_disp_drv_init(&disp_drv);
     disp_drv.draw_buf   = &disp_buf;
-    disp_drv.flush_cb   = fbdev_flush;
-    // disp_drv.flush_cb   = sdl_display_flush;
+    
+    if (type == 0) {
+        disp_drv.flush_cb   = sdl_display_flush;
+    }
+    else if (type == 1) {
+        disp_drv.flush_cb   = fbdev_flush;
+    }
+
     disp_drv.hor_res    = MY_DISP_HOR_RES;
     disp_drv.ver_res    = MY_DISP_VER_RES;
     lv_disp_drv_register(&disp_drv);

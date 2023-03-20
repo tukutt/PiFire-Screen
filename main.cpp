@@ -11,17 +11,77 @@
 #include <iostream>
 #include <string>
 #include <unistd.h>
-
 #include "lvgl/lvgl.h"
 #include "lvgl/demos/lv_demos.h"
 #include "lv_porting/lv_port_disp.h"
 #include "lv_porting/lv_port_indev.h"
-
 #include "ui.h"
 #include "time.h"
 #include <arpa/inet.h>
 #include <sys/ioctl.h>
 #include <net/if.h>
+
+
+/* Using SDL2 */
+#define DISP_USING_SDL      1
+/* Using framebuffer directly, config your fb in lv_drv_conf.h */
+#define DISP_USING_FB       0
+/* Enable touch pad */
+#define USING_TOUCH_PAD     0
+
+
+static char* get_IP_address();
+static char* get_host_name();
+static double get_cpu_load();
+static double get_memory_usage();
+static void data_update(lv_timer_t * timer);
+
+
+int main(int argc, char const *argv[])
+{
+    printf("> CM4Stack Lvgl demo <\n> Press ctrl + c to quit\n");
+
+    /* Lvgl init */
+    lv_init();
+
+    /* Display init */
+    #if DISP_USING_SDL
+    lv_port_disp_init(0);
+    #endif
+    #if DISP_USING_FB
+    lv_port_disp_init(1);
+    #endif
+
+    /* Input device init */
+    #if USING_TOUCH_PAD
+    lv_port_indev_init();
+    #endif
+
+
+    /* Little clock demo */
+    ui_init();
+    lv_timer_t * timer = lv_timer_create(data_update, 1000, NULL);
+    data_update(NULL);
+    cover_pull_down_Animation(ui_CoverPanel, 0);
+    logo_popout_Animation(ui_LogoC, 300 + 0);
+    logo_popout_Animation(ui_LogoM, 300 + 100);
+    logo_popout_Animation(ui_Logo4, 300 + 200);
+    cover_pull_up_Animation(ui_CoverPanel, 3000);
+
+    /* Or you can run Lvgl official demos */
+    // lv_demo_widgets();
+    // lv_demo_stress();
+    // lv_demo_benchmark();
+    // lv_demo_music();
+
+
+    while(1)
+    {
+        lv_timer_handler();
+        usleep(5000);
+    }
+    return 0;
+}
 
 
 char* get_IP_address()
@@ -89,43 +149,4 @@ void data_update(lv_timer_t * timer)
                 get_cpu_load(),
                 get_memory_usage());
     lv_label_set_text(ui_LabelSysInfos, data_buff);
-}
-
-
-int main(int argc, char const *argv[])
-{
-    /* Lvgl init */
-    lv_init();
-    lv_port_disp_init();
-    lv_port_indev_init();
-
-    printf("lvgl template with framebuffer :)\n");
-    printf("ctrl + c to quit\n");
-
-
-    /* Lvgl official demos */
-    // lv_demo_widgets();
-    // lv_demo_stress();
-    // lv_demo_benchmark();
-    // lv_demo_music();
-
-
-    /* little clock demo */
-    ui_init();
-    lv_timer_t * timer = lv_timer_create(data_update, 1000, NULL);
-    data_update(NULL);
-    cover_pull_down_Animation(ui_CoverPanel, 0);
-    logo_popout_Animation(ui_LogoC, 300 + 0);
-    logo_popout_Animation(ui_LogoM, 300 + 100);
-    logo_popout_Animation(ui_Logo4, 300 + 200);
-    cover_pull_up_Animation(ui_CoverPanel, 3000);
-
-
-
-    while(1)
-    {
-        lv_timer_handler();
-        usleep(5000);
-    }
-    return 0;
 }
