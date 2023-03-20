@@ -8,6 +8,16 @@
  * @copyright Copyright (c) 2023
  * 
  */
+/* Using SDL2 */
+#define DISP_USING_SDL      1
+/* Using framebuffer directly, config your fb in lv_drv_conf.h */
+#define DISP_USING_FB       0
+/* Enable touch pad */
+#define USING_TOUCH_PAD     0
+/* Use offical demos */
+#define USING_LVGL_DEMOS    0
+
+
 #include <iostream>
 #include <string>
 #include <unistd.h>
@@ -20,16 +30,6 @@
 #include <arpa/inet.h>
 #include <sys/ioctl.h>
 #include <net/if.h>
-
-
-/* Using SDL2 */
-#define DISP_USING_SDL      1
-/* Using framebuffer directly, config your fb in lv_drv_conf.h */
-#define DISP_USING_FB       0
-/* Enable touch pad */
-#define USING_TOUCH_PAD     0
-/* Use offical demos */
-#define USING_LVGL_DEMOS    0
 
 
 static char* get_IP_address();
