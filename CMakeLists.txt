@@ -30,9 +30,3 @@ target_link_libraries(play
     tick
     pthread
 )
-
-
-add_custom_command(TARGET play
-    POST_BUILD
-    COMMAND /home/parker/projects/CM4/LvglTemplate_CM4/copy.sh
-)
