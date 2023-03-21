@@ -14,6 +14,7 @@
 #include <stdlib.h>
 #include "tslib.h"
 #include "lv_drivers/sdl/sdl.h"
+#include "linux/input.h"
 
 /*********************
  *      DEFINES
@@ -202,11 +203,13 @@ static void touchpad_init(void)
     /*Your code comes here*/
 
     /* open ts device */
-    ts = ts_setup(NULL, 1);
-	if (!ts) {
-		perror("ts_setup");
-		exit(1);
-	}
+    // ts = ts_setup(NULL, 1);
+	// if (!ts) {
+	// 	perror("ts_setup");
+	// 	exit(1);
+	// }
+
+
 }
 
 /*Will be called by the library to read the touchpad*/
@@ -231,15 +234,30 @@ static void touchpad_read(lv_indev_drv_t * indev_drv, lv_indev_data_t * data)
 
     
 
-    /* read out all the event */
-    static int ret;
-    while (ts_read(ts, &samp, 1) > 0)
-    {
-        data->point.x = samp.x;
-        data->point.y = samp.y;
-    }
-    data->state = samp.pressure ? LV_INDEV_STATE_PR : LV_INDEV_STATE_REL;
+    // /* read out all the event */
+    // static int ret;
+    // while (ts_read(ts, &samp, 1) > 0)
+    // {
+    //     data->point.x = samp.x;
+    //     data->point.y = samp.y;
+    // }
+    // data->state = samp.pressure ? LV_INDEV_STATE_PR : LV_INDEV_STATE_REL;
     // printf("%d %d\n", last_x, last_y);
+
+
+    FILE* file;
+    file = fopen("/dev/input/event2", "r");
+    if (file == NULL) {
+        perror("open failed");
+        return;
+    }
+
+    static struct input_event event;
+    fread(&event, sizeof(struct input_event), 1, file);
+
+    printf("%d\n", event.value);
+
+
 }
 
 /*Return true is the touchpad is pressed*/

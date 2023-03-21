@@ -13,9 +13,9 @@
 /* Using framebuffer directly, config your fb in lv_drv_conf.h */
 #define DISP_USING_FB       0
 /* Enable touch pad */
-#define USING_TOUCH_PAD     0
+#define USING_TOUCH_PAD     1
 /* Use offical demos */
-#define USING_LVGL_DEMOS    0
+#define USING_LVGL_DEMOS    1
 
 
 #include <iostream>
