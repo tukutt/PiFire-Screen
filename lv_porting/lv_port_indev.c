@@ -12,9 +12,9 @@
 #include "lv_port_indev.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "tslib.h"
 #include "lv_drivers/sdl/sdl.h"
-#include "linux/input.h"
+#include "lv_drivers/indev/evdev.h"
+
 
 /*********************
  *      DEFINES
@@ -63,9 +63,6 @@ lv_indev_t * indev_button;
 static int32_t encoder_diff;
 static lv_indev_state_t encoder_state;
 
-static struct tsdev* ts;
-static struct ts_sample samp;
-
 /**********************
  *      MACROS
  **********************/
@@ -94,44 +91,20 @@ void lv_port_indev_init(uint8_t enableTouchPad)
      * Touchpad
      * -----------------*/
 
-    // /*Initialize your touchpad if you have*/
-    // touchpad_init();
+    // evdev_init();
+    evdev_set_file("/dev/input/event2");
 
-    // /*Register a touchpad input device*/
-    // lv_indev_drv_init(&indev_drv);
-    // indev_drv.type = LV_INDEV_TYPE_POINTER;
+    /*Initialize your touchpad if you have*/
+    touchpad_init();
+
+    /*Register a touchpad input device*/
+    lv_indev_drv_init(&indev_drv);
+    indev_drv.type = LV_INDEV_TYPE_POINTER;
     // indev_drv.read_cb = touchpad_read;
-    // indev_touchpad = lv_indev_drv_register(&indev_drv);
-    if (enableTouchPad) {
-        /*Initialize your touchpad if you have*/
-        touchpad_init();
-
-        /*Register a touchpad input device*/
-        lv_indev_drv_init(&indev_drv);
-        indev_drv.type = LV_INDEV_TYPE_POINTER;
-        indev_drv.read_cb = touchpad_read;
-        indev_touchpad = lv_indev_drv_register(&indev_drv);
-    }
-    else {
-        /*------------------
-        * Mouse
-        * -----------------*/
-
-        /*Initialize your mouse if you have*/
-        mouse_init();
-
-        /*Register a mouse input device*/
-        lv_indev_drv_init(&indev_drv);
-        indev_drv.type = LV_INDEV_TYPE_POINTER;
-        // indev_drv.read_cb = mouse_read;
-        indev_drv.read_cb = sdl_mouse_read;
-        indev_mouse = lv_indev_drv_register(&indev_drv);
-
-        /*Set cursor. For simplicity set a HOME symbol now.*/
-        lv_obj_t * mouse_cursor = lv_img_create(lv_scr_act());
-        // lv_img_set_src(mouse_cursor, LV_SYMBOL_HOME);
-        // lv_indev_set_cursor(indev_mouse, mouse_cursor);
-    }
+    indev_drv.read_cb = evdev_read;
+    indev_touchpad = lv_indev_drv_register(&indev_drv);
+    
+    
 
     // /*------------------
     //  * Mouse
@@ -222,14 +195,6 @@ static void touchpad_init(void)
 {
     /*Your code comes here*/
 
-    /* open ts device */
-    // ts = ts_setup(NULL, 1);
-	// if (!ts) {
-	// 	perror("ts_setup");
-	// 	exit(1);
-	// }
-
-
 }
 
 /*Will be called by the library to read the touchpad*/
@@ -247,39 +212,9 @@ static void touchpad_read(lv_indev_drv_t * indev_drv, lv_indev_data_t * data)
     //     data->state = LV_INDEV_STATE_REL;
     // }
 
-
     // /*Set the last pressed coordinates*/
     // data->point.x = last_x;
     // data->point.y = last_y;
-
-    
-
-    // /* read out all the event */
-    // static int ret;
-    // while (ts_read(ts, &samp, 1) > 0)
-    // {
-    //     data->point.x = samp.x;
-    //     data->point.y = samp.y;
-    // }
-    // data->state = samp.pressure ? LV_INDEV_STATE_PR : LV_INDEV_STATE_REL;
-    // printf("%d %d\n", last_x, last_y);
-
-
-    FILE* file;
-    file = fopen("/dev/input/event2", "r");
-    if (file == NULL) {
-        perror("open failed");
-        return;
-    }
-
-    static struct input_event event;
-    // fread(&event, sizeof(struct input_event), 1, file);
-    while (fread(&event, sizeof(struct input_event), 1, file) > 0);
-
-    printf("%d\n", event.value);
-
-    // printf("???\n");
-
 
 }
 
