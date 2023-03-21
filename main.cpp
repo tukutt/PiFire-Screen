@@ -9,9 +9,9 @@
  * 
  */
 /* Using SDL2 */
-#define DISP_USING_SDL      1
+#define DISP_USING_SDL      0
 /* Using framebuffer directly, config your fb in lv_drv_conf.h */
-#define DISP_USING_FB       0
+#define DISP_USING_FB       1
 /* Enable touch pad */
 #define USING_TOUCH_PAD     1
 /* Use offical demos */
