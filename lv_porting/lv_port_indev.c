@@ -112,25 +112,45 @@ void lv_port_indev_init(uint8_t enableTouchPad)
         indev_drv.read_cb = touchpad_read;
         indev_touchpad = lv_indev_drv_register(&indev_drv);
     }
+    else {
+        /*------------------
+        * Mouse
+        * -----------------*/
 
-    /*------------------
-     * Mouse
-     * -----------------*/
+        /*Initialize your mouse if you have*/
+        mouse_init();
 
-    /*Initialize your mouse if you have*/
-    mouse_init();
+        /*Register a mouse input device*/
+        lv_indev_drv_init(&indev_drv);
+        indev_drv.type = LV_INDEV_TYPE_POINTER;
+        // indev_drv.read_cb = mouse_read;
+        indev_drv.read_cb = sdl_mouse_read;
+        indev_mouse = lv_indev_drv_register(&indev_drv);
 
-    /*Register a mouse input device*/
-    lv_indev_drv_init(&indev_drv);
-    indev_drv.type = LV_INDEV_TYPE_POINTER;
-    // indev_drv.read_cb = mouse_read;
-    indev_drv.read_cb = sdl_mouse_read;
-    indev_mouse = lv_indev_drv_register(&indev_drv);
+        /*Set cursor. For simplicity set a HOME symbol now.*/
+        lv_obj_t * mouse_cursor = lv_img_create(lv_scr_act());
+        // lv_img_set_src(mouse_cursor, LV_SYMBOL_HOME);
+        // lv_indev_set_cursor(indev_mouse, mouse_cursor);
+    }
 
-    /*Set cursor. For simplicity set a HOME symbol now.*/
-    lv_obj_t * mouse_cursor = lv_img_create(lv_scr_act());
-    // lv_img_set_src(mouse_cursor, LV_SYMBOL_HOME);
-    // lv_indev_set_cursor(indev_mouse, mouse_cursor);
+    // /*------------------
+    //  * Mouse
+    //  * -----------------*/
+
+    // /*Initialize your mouse if you have*/
+    // mouse_init();
+
+    // /*Register a mouse input device*/
+    // lv_indev_drv_init(&indev_drv);
+    // indev_drv.type = LV_INDEV_TYPE_POINTER;
+    // // indev_drv.read_cb = mouse_read;
+    // indev_drv.read_cb = sdl_mouse_read;
+    // indev_mouse = lv_indev_drv_register(&indev_drv);
+
+    // /*Set cursor. For simplicity set a HOME symbol now.*/
+    // lv_obj_t * mouse_cursor = lv_img_create(lv_scr_act());
+    // // lv_img_set_src(mouse_cursor, LV_SYMBOL_HOME);
+    // // lv_indev_set_cursor(indev_mouse, mouse_cursor);
 
     // /*------------------
     //  * Keypad
@@ -253,9 +273,12 @@ static void touchpad_read(lv_indev_drv_t * indev_drv, lv_indev_data_t * data)
     }
 
     static struct input_event event;
-    fread(&event, sizeof(struct input_event), 1, file);
+    // fread(&event, sizeof(struct input_event), 1, file);
+    while (fread(&event, sizeof(struct input_event), 1, file) > 0);
 
     printf("%d\n", event.value);
+
+    // printf("???\n");
 
 
 }
