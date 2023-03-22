@@ -13,7 +13,7 @@
 /* Using framebuffer directly, config your fb in lv_drv_conf.h */
 #define DISP_USING_FB       1
 /* Enable touch pad */
-#define USING_TOUCH_PAD     1
+#define ENABLE_TOUCH_PAD    1
 /* Use offical demos */
 #define USING_LVGL_DEMOS    1
 
@@ -48,14 +48,12 @@ int main(int argc, char const *argv[])
 
     /* Display init */
     #if DISP_USING_SDL
-    lv_port_disp_init(0);
+        lv_port_disp_init(0);
+        lv_port_indev_init(0, ENABLE_TOUCH_PAD);
+    #elif DISP_USING_FB
+        lv_port_disp_init(1);
+        lv_port_indev_init(1, ENABLE_TOUCH_PAD);
     #endif
-    #if DISP_USING_FB
-    lv_port_disp_init(1);
-    #endif
-
-    /* Input device init */
-    lv_port_indev_init(USING_TOUCH_PAD);
     
 
     /* Lvgl offical demos */

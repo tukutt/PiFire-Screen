@@ -71,7 +71,7 @@ static lv_indev_state_t encoder_state;
  *   GLOBAL FUNCTIONS
  **********************/
 
-void lv_port_indev_init(uint8_t enableTouchPad)
+void lv_port_indev_init(uint8_t type, uint8_t enableTouchPad)
 {
     /**
      * Here you will find example implementation of input devices supported by LittelvGL:
@@ -87,25 +87,58 @@ void lv_port_indev_init(uint8_t enableTouchPad)
 
     static lv_indev_drv_t indev_drv;
 
+
+
+    if (enableTouchPad) {
+        /*------------------
+        * Touchpad
+        * -----------------*/
+        evdev_set_file("/dev/input/event2");
+        // evdev_set_file("/dev/input/by-path/platform-fe205000.i2c-event");
+
+        /*Initialize your touchpad if you have*/
+        touchpad_init();
+
+        /*Register a touchpad input device*/
+        lv_indev_drv_init(&indev_drv);
+        indev_drv.type = LV_INDEV_TYPE_POINTER;
+        // indev_drv.read_cb = touchpad_read;
+        indev_drv.read_cb = evdev_read;
+        indev_touchpad = lv_indev_drv_register(&indev_drv);
+    }
+
     /*------------------
      * Touchpad
      * -----------------*/
+    // // evdev_init();
+    // // evdev_set_file("/dev/input/event2");
+    // evdev_set_file("/dev/input/by-path/platform-fe205000.i2c-event");
 
-    // evdev_init();
-    evdev_set_file("/dev/input/event2");
+    // /*Initialize your touchpad if you have*/
+    // touchpad_init();
 
-    /*Initialize your touchpad if you have*/
-    touchpad_init();
-
-    /*Register a touchpad input device*/
-    lv_indev_drv_init(&indev_drv);
-    indev_drv.type = LV_INDEV_TYPE_POINTER;
-    // indev_drv.read_cb = touchpad_read;
-    indev_drv.read_cb = evdev_read;
-    indev_touchpad = lv_indev_drv_register(&indev_drv);
+    // /*Register a touchpad input device*/
+    // lv_indev_drv_init(&indev_drv);
+    // indev_drv.type = LV_INDEV_TYPE_POINTER;
+    // // indev_drv.read_cb = touchpad_read;
+    // indev_drv.read_cb = evdev_read;
+    // indev_touchpad = lv_indev_drv_register(&indev_drv);
     
     
+    if (type == 0) {
+        /*------------------
+        * Mouse
+        * -----------------*/
+        /*Initialize your mouse if you have*/
+        mouse_init();
 
+        /*Register a mouse input device*/
+        lv_indev_drv_init(&indev_drv);
+        indev_drv.type = LV_INDEV_TYPE_POINTER;
+        // indev_drv.read_cb = mouse_read;
+        indev_drv.read_cb = sdl_mouse_read;
+        indev_mouse = lv_indev_drv_register(&indev_drv);
+    }
     // /*------------------
     //  * Mouse
     //  * -----------------*/
