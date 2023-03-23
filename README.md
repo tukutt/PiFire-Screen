@@ -1,36 +1,23 @@
-# Lvgl demo for CM4Stack
+# CM4Stack_LvglDemo
 
+Lvgl Demo for CM4STACK
 
-#### Install tslib
-
-```
-sudo apt install libts-bin
-```
-
-Run calibration
-
-```
-sudo ts_calibrat
-```
-
-#### Submodules
+#### Update submodules
 
 ```
 git submodule init
 git submodule update
 ```
 
-#### Compilation
+#### Build
 
 ```
 mkdir build && cd build
-cmake ..
-make
+cmake .. && make
 ```
 
 #### Run
 
 ```
-./play
+./cm4LvglDemo
 ```
-

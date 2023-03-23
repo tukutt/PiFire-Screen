@@ -10,23 +10,17 @@ include_directories(
 # tick
 add_library(tick tick.c)
 
+
 # lvgl
 add_subdirectory(lvgl)
 add_subdirectory(lv_porting)
 
-# app
-file(GLOB APP_SRCS 
-    app/ui/*.c
-)
-include_directories(app/ui)
 
-
-add_executable(cm4LvglDemo main.cpp ${APP_SRCS})
+add_executable(cm4LvglDemo main.cpp)
 target_link_libraries(cm4LvglDemo
     lvgl
     lvgl_porting
     lvgl_examples
     lvgl_demos
     tick
-    pthread
 )

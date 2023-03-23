@@ -87,14 +87,12 @@ void lv_port_indev_init(uint8_t type, uint8_t enableTouchPad)
 
     static lv_indev_drv_t indev_drv;
 
-
-
     if (enableTouchPad) {
         /*------------------
         * Touchpad
         * -----------------*/
-        evdev_set_file("/dev/input/event2");
-        // evdev_set_file("/dev/input/by-path/platform-fe205000.i2c-event");
+        // evdev_set_file("/dev/input/event2");
+        evdev_set_file("/dev/input/by-path/platform-fe205000.i2c-event");
 
         /*Initialize your touchpad if you have*/
         touchpad_init();
@@ -123,7 +121,6 @@ void lv_port_indev_init(uint8_t type, uint8_t enableTouchPad)
     // // indev_drv.read_cb = touchpad_read;
     // indev_drv.read_cb = evdev_read;
     // indev_touchpad = lv_indev_drv_register(&indev_drv);
-    
     
     if (type == 0) {
         /*------------------
