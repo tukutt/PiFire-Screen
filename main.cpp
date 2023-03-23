@@ -14,7 +14,7 @@
 /* you can define your path to FBDEV_PATH in lv_drv_conf.h */
 #define DISP_USING_FB       1
 /* Enable touch pad */
-#define ENABLE_TOUCH_PAD    0
+#define ENABLE_TOUCH_PAD    1
 
 
 #include <iostream>
