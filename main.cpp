@@ -10,14 +10,14 @@
  */
 /* Using SDL2 */
 #define DISP_USING_SDL      0
-/* Using framebuffer directly, config your fb in lv_drv_conf.h */
+/* Using framebuffer directly */
+/* you can define your path to FBDEV_PATH in lv_drv_conf.h */
 #define DISP_USING_FB       1
 /* Enable touch pad */
-#define ENABLE_TOUCH_PAD    1
+#define ENABLE_TOUCH_PAD    0
 
 
 #include <iostream>
-#include <string>
 #include <unistd.h>
 #include "lvgl/lvgl.h"
 #include "lvgl/demos/lv_demos.h"

@@ -126,9 +126,6 @@ void lv_port_indev_init(uint8_t type, uint8_t enableTouchPad)
         /*------------------
         * Mouse
         * -----------------*/
-        /*Initialize your mouse if you have*/
-        mouse_init();
-
         /*Register a mouse input device*/
         lv_indev_drv_init(&indev_drv);
         indev_drv.type = LV_INDEV_TYPE_POINTER;
@@ -155,6 +152,17 @@ void lv_port_indev_init(uint8_t type, uint8_t enableTouchPad)
     // // lv_img_set_src(mouse_cursor, LV_SYMBOL_HOME);
     // // lv_indev_set_cursor(indev_mouse, mouse_cursor);
 
+
+    // if (type == 0) {
+    //     /*------------------
+    //     * Keypad
+    //     * -----------------*/
+    //     /*Register a keypad input device*/
+    //     lv_indev_drv_init(&indev_drv);
+    //     indev_drv.type = LV_INDEV_TYPE_KEYPAD;
+    //     indev_drv.read_cb = sdl_keyboard_read;
+    //     indev_keypad = lv_indev_drv_register(&indev_drv);
+    // }
     // /*------------------
     //  * Keypad
     //  * -----------------*/
@@ -173,6 +181,17 @@ void lv_port_indev_init(uint8_t type, uint8_t enableTouchPad)
     //  *and assign this input device to group to navigate in it:
     //  *`lv_indev_set_group(indev_keypad, group);`*/
 
+
+    // if (type == 0) {
+    //     /*------------------
+    //     * Encoder
+    //     * -----------------*/
+    //     /*Register a encoder input device*/
+    //     lv_indev_drv_init(&indev_drv);
+    //     indev_drv.type = LV_INDEV_TYPE_ENCODER;
+    //     indev_drv.read_cb = sdl_mousewheel_read;
+    //     indev_encoder = lv_indev_drv_register(&indev_drv);
+    // }
     // /*------------------
     //  * Encoder
     //  * -----------------*/
