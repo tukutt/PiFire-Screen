@@ -1,6 +1,6 @@
-# CM4Stack_LvglDemo
+# PiFire-Screen
 
-Lvgl Demo for CM4STACK
+5" PiFire Screen
 
 #### Update submodules
 
@@ -19,5 +19,5 @@ cmake .. && make
 #### Run
 
 ```
-./cm4LvglDemo
+./Pifire-Screen
 ```
