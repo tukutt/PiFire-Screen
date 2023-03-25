@@ -23,7 +23,7 @@
 #include "lvgl/demos/lv_demos.h"
 #include "lv_porting/lv_port_disp.h"
 #include "lv_porting/lv_port_indev.h"
-
+#include "app/ui/ui.h"
 
 int main(int argc, char const *argv[])
 {
@@ -43,11 +43,12 @@ int main(int argc, char const *argv[])
     
 
     /* Lvgl offical demos */
-    lv_demo_widgets();
+    //lv_demo_widgets();
     // lv_demo_stress();
     // lv_demo_benchmark();
     // lv_demo_music();
 
+    ui_init();
 
     while(1)
     {
