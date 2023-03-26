@@ -17,7 +17,9 @@ cmake .. && make
 ```
 
 #### Run
-
 ```
 ./Pifire-Screen
 ```
+
+### Licence
+<a href="https://www.flaticon.com/free-icons/motor" title="motor icons">Motor icons created by Mayor Icons - Flaticon</a>

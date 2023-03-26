@@ -42,7 +42,6 @@ void ui_event_GrillTemp( lv_event_t * e);
 extern lv_obj_t *ui_GrillTemp;
 extern lv_obj_t *ui_GrillTempLabel;
 extern lv_obj_t *ui_GrillTargetLabel;
-extern lv_obj_t *ui_NavMenu;
 extern lv_obj_t *ui_Smokeplus;
 extern lv_obj_t *ui_SmokeplusLabel;
 extern lv_obj_t *ui_SmokePlusSwitch;
@@ -52,11 +51,35 @@ extern lv_obj_t *ui_ModeList;
 extern lv_obj_t *ui_Pellets;
 extern lv_obj_t *ui_PelletsLabel;
 extern lv_obj_t *ui_Label1;
-extern lv_obj_t *ui_Image2;
+extern lv_obj_t *ui_HistoryPanel;
+extern lv_obj_t *ui_NavMenu;
+void ui_event_MainImg( lv_event_t * e);
+extern lv_obj_t *ui_MainImg;
+void ui_event_HistoryImg( lv_event_t * e);
+extern lv_obj_t *ui_HistoryImg;
+extern lv_obj_t *ui_ReceipeImg;
+extern lv_obj_t *ui_PelletImg;
+extern lv_obj_t *ui_EventsImg;
+extern lv_obj_t *ui_SettingsImg;
+extern lv_obj_t *ui_LogoImg;
+extern lv_obj_t *ui_StatusPanel;
+extern lv_obj_t *ui_TimeLabel;
+extern lv_obj_t *ui_FanImg;
+extern lv_obj_t *ui_IgnitionImg;
+extern lv_obj_t *ui_MotorImg;
 extern lv_obj_t *ui____initial_actions0;
 
 
+LV_IMG_DECLARE( ui_img_ic_grill_png);   // assets/ic_grill.png
+LV_IMG_DECLARE( ui_img_ic_menu_history_png);   // assets/ic_menu_history.png
+LV_IMG_DECLARE( ui_img_ic_menu_recipes_png);   // assets/ic_menu_recipes.png
+LV_IMG_DECLARE( ui_img_ic_grill_pellets_png);   // assets/ic_grill_pellets.png
+LV_IMG_DECLARE( ui_img_ic_menu_events_png);   // assets/ic_menu_events.png
+LV_IMG_DECLARE( ui_img_ic_menu_settings_png);   // assets/ic_menu_settings.png
 LV_IMG_DECLARE( ui_img_flame_png);   // assets/flame.png
+LV_IMG_DECLARE( ui_img_ic_settings_pwm_png);   // assets/ic_settings_pwm.png
+LV_IMG_DECLARE( ui_img_ic_ignition_png);   // assets/ic_ignition.png
+LV_IMG_DECLARE( ui_img_667599197);   // assets/ic_electric-motor.png
 
 
 
