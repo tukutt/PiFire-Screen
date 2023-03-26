@@ -14,7 +14,7 @@ extern "C" {
 
 #include "ui_events.h"
 extern lv_obj_t *ui_Screen1;
-extern lv_obj_t *ui_Panel2;
+extern lv_obj_t *ui_DashboardPanel;
 extern lv_obj_t *ui_ProbeGroup;
 extern lv_obj_t *ui_Probe1Group;
 extern lv_obj_t *ui_Probe1Temp;
@@ -52,9 +52,11 @@ extern lv_obj_t *ui_ModeList;
 extern lv_obj_t *ui_Pellets;
 extern lv_obj_t *ui_PelletsLabel;
 extern lv_obj_t *ui_Label1;
+extern lv_obj_t *ui_Image2;
 extern lv_obj_t *ui____initial_actions0;
 
 
+LV_IMG_DECLARE( ui_img_flame_png);   // assets/flame.png
 
 
 

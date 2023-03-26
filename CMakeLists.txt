@@ -25,7 +25,5 @@ add_executable(PiFire-Screen main.cpp ${APP_SRCS})
 target_link_libraries(PiFire-Screen
     lvgl
     lvgl_porting
-    lvgl_examples
-    lvgl_demos
     tick
 )
